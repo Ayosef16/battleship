@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "private": "true",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "repository": {
     "type": "git",

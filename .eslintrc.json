@@ -15,6 +15,9 @@
     "@babel/no-invalid-this": "error",
     "@babel/no-unused-expressions": "error",
     "@babel/object-curly-spacing": "off",
-    "@babel/semi": "error"
+    "@babel/semi": "error",
+    "no-plusplus": "off",
+    "no-console": "off",
+    "no-use-before-define": "off"
   }
 }
