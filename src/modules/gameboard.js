@@ -22,6 +22,10 @@ export default function gameBoardFactory() {
     const endPoint = direction === "col" ? size + x : size + y;
     if (endPoint > gameBoardSize) return "Ship cannot be placed";
 
+    // Check that the ships doesn't overlap
+    const isShipOverlapped = shipOverlap(gameboard, x, y, size, direction);
+    if (isShipOverlapped) return "Ships are overlapping, cannot be placed";
+
     // Place the ship on the gameboard checking for it's direction
     if (direction === "col") {
       for (let i = x; i < endPoint; i++) {
@@ -33,6 +37,7 @@ export default function gameBoardFactory() {
       }
     }
   };
+
   return { getGameBoard, placeShip };
 }
 
@@ -47,4 +52,19 @@ function createGameBoardGrid(size = 10) {
     gameboard.push(newRow);
   }
   return gameboard;
+}
+
+// Make a function that check if a ship is overlapping with another
+function shipOverlap(gameboard, x, y, size, direction) {
+  const endPoint = direction === "col" ? size + x : size + y;
+  if (direction === "col") {
+    for (let i = x; i < endPoint; i++) {
+      if (gameboard[i][y] !== "") return true;
+    }
+  } else {
+    for (let i = y; i < endPoint; i++) {
+      if (gameboard[x][i] !== "") return true;
+    }
+  }
+  return false;
 }

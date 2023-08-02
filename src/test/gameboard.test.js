@@ -104,3 +104,23 @@ test("check that you can place ships vertically", () => {
     ["", "", "", "", "", "", "", "", "", ""],
   ]);
 });
+
+test("check that you can't overlap ships", () => {
+  const gameboard = gameBoardFactory();
+  gameboard.placeShip(3, 5, 4, "col");
+  expect(gameboard.placeShip(6, 2, 5)).toBe(
+    "Ships are overlapping, cannot be placed"
+  );
+  expect(gameboard.getGameBoard()).toEqual([
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "1", "", "", "", ""],
+    ["", "", "", "", "", "1", "", "", "", ""],
+    ["", "", "", "", "", "1", "", "", "", ""],
+    ["", "", "", "", "", "1", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+  ]);
+});
