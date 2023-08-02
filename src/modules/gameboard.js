@@ -9,6 +9,7 @@ export default function gameBoardFactory() {
   // Variables to keep track of how many ships have been placed and to store them
   let shipCount = 0;
   const ships = new Map();
+  const getShips = () => ships;
 
   // Function that let you place ships on the gameboard
   const placeShip = (x, y, size, direction = "row") => {
@@ -38,7 +39,24 @@ export default function gameBoardFactory() {
     }
   };
 
-  return { getGameBoard, placeShip };
+  const receiveAttack = (x, y) => {
+    // Make sure it doesn't receive an attack outside the gameboard
+    if (x >= gameboard.length || y >= gameboard.length)
+      return "Invalid coordinates";
+
+    // Update the number of hits on the ship if it's not empty or a hit already
+    if (gameboard[x][y] !== "" && gameboard[x][y] !== "x") {
+      ships.get(gameboard[x][y]).hit();
+    }
+    // Change the gameboard only if the coordinates are not a missed attack
+    if (gameboard[x][y] !== "x") {
+      gameboard[x][y] = "x";
+    } else {
+      return "Cannot attack the same spot twice";
+    }
+  };
+
+  return { getGameBoard, placeShip, receiveAttack, getShips };
 }
 
 // Make a function that creates a game board grid, default size is 10x10
