@@ -2,7 +2,9 @@ export default function shipFactory(size) {
   const length = size;
   let hits = 0;
   const name = getShipName(size);
-  const hit = () => hits++;
+  const hit = () => {
+    if (hits < length) hits++;
+  };
   const isSunk = () => !(length > hits);
   const getHits = () => hits;
   const getName = () => name;
