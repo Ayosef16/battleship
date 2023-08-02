@@ -204,3 +204,44 @@ test("check that you cannot outside the gameboard", () => {
   const gameboard = gameBoardFactory();
   expect(gameboard.receiveAttack(0, 10)).toBe("Invalid coordinates");
 });
+
+test("check if all ships are sunk when there are ships alive", () => {
+  const gameboard = gameBoardFactory();
+  gameboard.placeShip(0, 0, 5);
+  gameboard.placeShip(3, 5, 4, "col");
+  gameboard.placeShip(7, 0, 3, "col");
+  gameboard.placeShip(9, 4, 3);
+  gameboard.placeShip(6, 7, 2);
+  gameboard.placeShip(6, 1, 2);
+  gameboard.placeShip(2, 2, 2, "col");
+  gameboard.placeShip(9, 9, 1);
+  gameboard.placeShip(4, 7, 1);
+  gameboard.placeShip(8, 3, 1);
+  gameboard.placeShip(1, 8, 1);
+  gameboard.receiveAttack(0, 0);
+  gameboard.receiveAttack(0, 1);
+  gameboard.receiveAttack(0, 2);
+  gameboard.receiveAttack(0, 3);
+  gameboard.receiveAttack(0, 4);
+  expect(gameboard.isAllShipsSunk()).toBeFalsy();
+});
+
+test("check if all ships are sunk when they are sunk", () => {
+  const gameboard = gameBoardFactory();
+  gameboard.placeShip(0, 0, 5);
+  gameboard.placeShip(3, 5, 4, "col");
+  gameboard.placeShip(9, 9, 1);
+  gameboard.placeShip(4, 7, 1);
+  gameboard.receiveAttack(0, 0);
+  gameboard.receiveAttack(0, 1);
+  gameboard.receiveAttack(0, 2);
+  gameboard.receiveAttack(0, 3);
+  gameboard.receiveAttack(0, 4);
+  gameboard.receiveAttack(3, 5);
+  gameboard.receiveAttack(4, 5);
+  gameboard.receiveAttack(5, 5);
+  gameboard.receiveAttack(6, 5);
+  gameboard.receiveAttack(9, 9);
+  gameboard.receiveAttack(4, 7);
+  expect(gameboard.isAllShipsSunk()).toBeTruthy();
+});

@@ -1,4 +1,4 @@
-import shipFactory from "./ship";
+import shipFactory from "./ship.js";
 
 // Make a game board factory that works as a gameboard for the battleship game.
 export default function gameBoardFactory() {
@@ -56,7 +56,9 @@ export default function gameBoardFactory() {
     }
   };
 
-  return { getGameBoard, placeShip, receiveAttack, getShips };
+  const isAllShipsSunk = () => allShipsSunk(ships);
+
+  return { getGameBoard, placeShip, receiveAttack, getShips, isAllShipsSunk };
 }
 
 // Make a function that creates a game board grid, default size is 10x10
@@ -85,4 +87,11 @@ function shipOverlap(gameboard, x, y, size, direction) {
     }
   }
   return false;
+}
+
+// Make a function that check if all the ships have been sunk
+function allShipsSunk(map) {
+  const ships = [];
+  map.forEach((value) => ships.push(value));
+  return ships.every((ship) => ship.isSunk());
 }
