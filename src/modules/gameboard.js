@@ -1,4 +1,4 @@
-import shipFactory from "./ship.js";
+import shipFactory from "./ship";
 
 // Make a game board factory that works as a gameboard for the battleship game.
 export default function gameBoardFactory() {
