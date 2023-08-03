@@ -62,7 +62,7 @@ export default function gameBoardFactory() {
 }
 
 // Make a function that creates a game board grid, default size is 10x10
-function createGameBoardGrid(size = 10) {
+export function createGameBoardGrid(size = 10) {
   const gameboard = [];
   for (let row = 0; row < size; row++) {
     const newRow = [];
