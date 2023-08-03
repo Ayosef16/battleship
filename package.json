@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "private": "true",
-  "type": "module",
   "scripts": {
     "test": "jest",
-    "test-watch": "jest --watch"
+    "test-watch": "jest --watch",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
