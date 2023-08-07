@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Battleship</title>
+    <script src="main.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Ysabeau+SC&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="../src/images/favicon.png" />
+  </head>
+  <body>
+    <header id="header">
+      <div class="header-title">Battleship</div>
+    </header>
+    <main id="main"></main>
+    <footer id="footer">
+      <p>
+        Copyright ©
+        <span id="copyright-year">
+          <script>
+            document
+              .getElementById("copyright-year")
+              .appendChild(document.createTextNode(new Date().getFullYear()));
+          </script>
+        </span>
+        <a href="https://github.com/Ayosef16" target="_blank">Ayosef16</a>
+      </p>
+    </footer>
+  </body>
+</html>
