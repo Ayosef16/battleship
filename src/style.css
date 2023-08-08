@@ -43,6 +43,36 @@ body {
 
 #main {
   grid-area: main;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+}
+
+.player-grid,
+.computer-grid {
+  min-width: 400px;
+  min-height: 400px;
+  outline: 3px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-row {
+  /* border: 1px solid black; */
+  flex: 1;
+  display: flex;
+}
+
+.grid-col {
+  border: 1px solid var(--light-blue);
+  flex: 1;
+  transition: background-color 200ms ease-in-out;
+}
+
+.grid-col:hover {
+  cursor: pointer;
+  background-color: var(--blue);
 }
 
 #footer {
