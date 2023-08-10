@@ -50,7 +50,7 @@ export default function gameLoopFactory() {
   // Define the player turn
   const playerTurn = (x, y) => {
     if (checkWinner()) {
-      declareWinner();
+      console.log(declareWinner());
       return;
     }
     if (isPlayerTurn) {
@@ -64,7 +64,7 @@ export default function gameLoopFactory() {
   // Define the computer turn
   const computerTurn = () => {
     if (checkWinner()) {
-      declareWinner();
+      console.log(declareWinner());
       return;
     }
     if (!isPlayerTurn) {
@@ -74,6 +74,8 @@ export default function gameLoopFactory() {
 
       // Check if the computer plays again or not
       isPlayerTurn = !playerGameBoard.isShipHitted(compX, compY);
+
+      return { compX, compY };
     }
   };
 
