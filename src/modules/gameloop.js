@@ -47,8 +47,8 @@ export default function gameLoopFactory() {
     return computer.getName();
   };
 
-  // Define the game loop
-  const gameTurn = (x, y) => {
+  // Define the player turn
+  const playerTurn = (x, y) => {
     if (checkWinner()) {
       declareWinner();
       return;
@@ -58,9 +58,19 @@ export default function gameLoopFactory() {
 
       // Check if the player plays again or not
       isPlayerTurn = computerGameBoard.isShipHitted(x, y);
-    } else {
+    }
+  };
+
+  // Define the computer turn
+  const computerTurn = () => {
+    if (checkWinner()) {
+      declareWinner();
+      return;
+    }
+    if (!isPlayerTurn) {
       const { compX, compY } = computer.attack(playerGameBoard);
 
+      // Check if the computer plays again or not
       isPlayerTurn = !playerGameBoard.isShipHitted(compX, compY);
     }
   };
@@ -84,7 +94,8 @@ export default function gameLoopFactory() {
   return {
     getPlayerBoard,
     getComputerBoard,
-    gameTurn,
+    playerTurn,
+    computerTurn,
     getCurrentPlayerName,
     declareWinner,
     checkWinner,
