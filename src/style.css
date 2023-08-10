@@ -67,12 +67,20 @@ body {
 .grid-col {
   border: 1px solid var(--light-blue);
   flex: 1;
-  transition: background-color 200ms ease-in-out;
+  transition: background-color 100ms ease-in-out;
 }
 
-.grid-col:hover {
+.computer-grid .grid-col:hover {
   cursor: pointer;
   background-color: var(--blue);
+}
+
+.hit {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='black' stroke-width='1'/><path d='M0 0 L100 100 ' stroke='black' stroke-width='1'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%, auto;
+  background-color: red;
 }
 
 #footer {
