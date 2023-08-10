@@ -33,25 +33,39 @@ export function createEventListener(game) {
   // Add an event listener to each coordinate
   coordinates.forEach((coordinate) =>
     coordinate.addEventListener("click", () => {
-      if (coordinate.classList.contains("hit")) return;
-      coordinate.classList.add("hit");
+      if (
+        coordinate.classList.contains("hit-ship") ||
+        coordinate.classList.contains("hit-miss")
+      )
+        return;
       const posX = coordinate.dataset.x;
       const posY = coordinate.dataset.y;
-      sendPlayerAttack(posX, posY, game);
-      sendComputerAttack(game);
-      //   updateGameBoard();
+      // Check if it's the player turn
+      if (game.getCurrentPlayerName() !== "computer") {
+        displayCurrentPlayer(game.getCurrentPlayerName());
+        game.playerTurn(posX, posY);
+      }
+
+      // Add the respective class to the hitted coordinate
+      addCoordinateClass(posX, posY, game.getComputerBoard(), coordinate);
+
+      // Let the computer play as long as it's it turn.
+      while (game.getCurrentPlayerName() === "computer") {
+        game.computerTurn();
+      }
     })
   );
 }
 
-function sendPlayerAttack(x, y, game) {
-  game.gameTurn(x, y);
+function addCoordinateClass(x, y, gameboard, coordinate) {
+  if (gameboard.isShipHitted(x, y)) {
+    coordinate.classList.add("hit-ship");
+  } else {
+    coordinate.classList.add("hit-miss");
+  }
 }
 
-function sendComputerAttack(game) {
-  game.gameTurn();
+export function displayCurrentPlayer(name) {
+  const currentPlayer = document.querySelector(".current-player");
+  currentPlayer.textContent = `${name} turn`;
 }
-
-// function updateGameBoard(x,y,gameboard) {
-//     if (gameboard[x][y] === 'x')
-// }
