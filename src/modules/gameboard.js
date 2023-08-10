@@ -2,9 +2,11 @@ import shipFactory from "./ship";
 
 // Make a game board factory that works as a gameboard for the battleship game.
 export default function gameBoardFactory() {
-  // Create gameboard grid
+  // Create gameboard and ship board to keep track of the ships
   const gameboard = createGameBoardGrid();
+  const shipboard = createGameBoardGrid();
   const getGameBoard = () => gameboard;
+  const getShipBoard = () => shipboard;
 
   // Variables to keep track of how many ships have been placed and to store them
   let shipCount = 0;
@@ -31,10 +33,12 @@ export default function gameBoardFactory() {
     if (direction === "col") {
       for (let i = x; i < endPoint; i++) {
         gameboard[i][y] = `${shipCount}`;
+        shipboard[i][y] = `${shipCount}`;
       }
     } else {
       for (let i = y; i < endPoint; i++) {
         gameboard[x][i] = `${shipCount}`;
+        shipboard[x][i] = `${shipCount}`;
       }
     }
   };
@@ -56,9 +60,22 @@ export default function gameBoardFactory() {
     }
   };
 
+  const isShipHitted = (x, y) => {
+    if (shipboard[x][y] !== "") return true;
+    return false;
+  };
+
   const isAllShipsSunk = () => allShipsSunk(ships);
 
-  return { getGameBoard, placeShip, receiveAttack, getShips, isAllShipsSunk };
+  return {
+    getGameBoard,
+    getShipBoard,
+    placeShip,
+    receiveAttack,
+    getShips,
+    isShipHitted,
+    isAllShipsSunk,
+  };
 }
 
 // Make a function that creates a game board grid, default size is 10x10

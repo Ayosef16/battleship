@@ -18,7 +18,7 @@ test("check that the game board is a 10x10 grid", () => {
   ]);
 });
 
-test("check that you can place a ship inside the game board", () => {
+test("check that you can place a ship inside the gameboard", () => {
   const gameboard = gameBoardFactory();
   gameboard.placeShip(0, 0, 5);
   expect(gameboard.getGameBoard()).toEqual([
@@ -35,7 +35,24 @@ test("check that you can place a ship inside the game board", () => {
   ]);
 });
 
-test("check that you can place a ship at coordinates (3,5) on the game board", () => {
+test("check that you can place a ship inside the shipboard", () => {
+  const gameboard = gameBoardFactory();
+  gameboard.placeShip(0, 0, 5);
+  expect(gameboard.getShipBoard()).toEqual([
+    ["1", "1", "1", "1", "1", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+  ]);
+});
+
+test("check that you can place a ship at coordinates (3,5) on the gameboard", () => {
   const gameboard = gameBoardFactory();
   gameboard.placeShip(3, 5, 3);
   expect(gameboard.getGameBoard()).toEqual([
@@ -52,7 +69,24 @@ test("check that you can place a ship at coordinates (3,5) on the game board", (
   ]);
 });
 
-test("check that you can place more than 1 ship on the game board", () => {
+test("check that you can place a ship at coordinates (3,5) on the shipboard", () => {
+  const gameboard = gameBoardFactory();
+  gameboard.placeShip(3, 5, 3);
+  expect(gameboard.getShipBoard()).toEqual([
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "1", "1", "1", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", ""],
+  ]);
+});
+
+test("check that you can place more than 1 ship on the gameboard", () => {
   const gameboard = gameBoardFactory();
   gameboard.placeShip(3, 5, 3);
   gameboard.placeShip(6, 2, 5);
@@ -70,7 +104,7 @@ test("check that you can place more than 1 ship on the game board", () => {
   ]);
 });
 
-test("check that the ship is not placed outside of the game board", () => {
+test("check that the ship is not placed outside of the gameboard", () => {
   const gameboard = gameBoardFactory();
   expect(gameboard.placeShip(9, 8, 3)).toBe("Ship cannot be placed");
   expect(gameboard.getGameBoard()).toEqual([
@@ -200,9 +234,23 @@ test("check that you cannot hit the same spot twice", () => {
   );
 });
 
-test("check that you cannot outside the gameboard", () => {
+test("check that you cannot hit outside the gameboard", () => {
   const gameboard = gameBoardFactory();
   expect(gameboard.receiveAttack(0, 10)).toBe("Invalid coordinates");
+});
+
+test("check that it keeps track if a coordinate hit a ship succesfully", () => {
+  const gameboard = gameBoardFactory();
+  gameboard.placeShip(0, 0, 5);
+  expect(gameboard.isShipHitted(0, 0)).toBeTruthy();
+  expect(gameboard.isShipHitted(0, 1)).toBeTruthy();
+});
+
+test("check that it keeps track if a coordinate miss a ship", () => {
+  const gameboard = gameBoardFactory();
+  gameboard.placeShip(0, 0, 5);
+  expect(gameboard.isShipHitted(1, 0)).toBeFalsy();
+  expect(gameboard.isShipHitted(1, 1)).toBeFalsy();
 });
 
 test("check if all ships are sunk when there are ships alive", () => {
