@@ -8,6 +8,10 @@ export default function gameLoopFactory() {
   const player = playerFactory("player");
   const computer = computerFactory();
 
+  // Get player and computer board
+  const getPlayerBoard = () => playerGameBoard.getGameBoard();
+  const getComputerBoard = () => computerGameBoard.getGameBoard();
+
   // Place player ships
   playerGameBoard.placeShip(0, 0, 5);
   playerGameBoard.placeShip(3, 5, 4, "col");
@@ -51,10 +55,13 @@ export default function gameLoopFactory() {
     }
     if (isPlayerTurn) {
       player.attack(x, y, computerGameBoard);
-      isPlayerTurn = false;
+
+      // Check if the player plays again or not
+      isPlayerTurn = computerGameBoard.isShipHitted(x, y);
     } else {
-      computer.attack(playerGameBoard);
-      isPlayerTurn = true;
+      const { compX, compY } = computer.attack(playerGameBoard);
+
+      isPlayerTurn = !playerGameBoard.isShipHitted(compX, compY);
     }
   };
 
@@ -74,5 +81,12 @@ export default function gameLoopFactory() {
     if (playerGameBoard.isAllShipsSunk()) return `${computer.getName()} wins!`;
     return `${player.getName()} wins!`;
   };
-  return { gameTurn, getCurrentPlayerName, declareWinner, checkWinner };
+  return {
+    getPlayerBoard,
+    getComputerBoard,
+    gameTurn,
+    getCurrentPlayerName,
+    declareWinner,
+    checkWinner,
+  };
 }
