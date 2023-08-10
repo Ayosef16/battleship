@@ -44,6 +44,17 @@ body {
 #main {
   grid-area: main;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  background: url(./images/sunny.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.grid-container {
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 100px;
@@ -56,16 +67,27 @@ body {
   outline: 3px solid black;
   display: flex;
   flex-direction: column;
+  position: relative;
+  isolation: isolate;
+}
+
+.player-grid::after,
+.computer-grid::after {
+  content: "";
+  background-color: var(--light-blue);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.8;
 }
 
 .grid-row {
-  /* border: 1px solid black; */
   flex: 1;
   display: flex;
 }
 
 .grid-col {
-  border: 1px solid var(--light-blue);
+  border: 1px solid var(--white);
   flex: 1;
   transition: background-color 100ms ease-in-out;
 }
