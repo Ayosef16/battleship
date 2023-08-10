@@ -38,8 +38,8 @@ export function createEventListener(game) {
         coordinate.classList.contains("hit-miss")
       )
         return;
-      const posX = coordinate.dataset.x;
-      const posY = coordinate.dataset.y;
+      const posX = parseInt(coordinate.dataset.x, 10);
+      const posY = parseInt(coordinate.dataset.y, 10);
       // Check if it's the player turn
       if (game.getCurrentPlayerName() !== "computer") {
         displayCurrentPlayer(game.getCurrentPlayerName());
@@ -51,7 +51,7 @@ export function createEventListener(game) {
 
       // Let the computer play as long as it's it turn.
       while (game.getCurrentPlayerName() === "computer") {
-        game.computerTurn();
+        updatePlayerGrid(game);
       }
     })
   );
@@ -68,4 +68,33 @@ function addCoordinateClass(x, y, gameboard, coordinate) {
 export function displayCurrentPlayer(name) {
   const currentPlayer = document.querySelector(".current-player");
   currentPlayer.textContent = `${name} turn`;
+}
+
+function updatePlayerGrid(game) {
+  // Get the player grid and it's coordinates
+  const playerGrid = document.querySelector(".player-grid");
+  const coordinates = playerGrid.querySelectorAll(".grid-col");
+
+  // Get the x and y position randomly generated for the computer
+  const result = game.computerTurn();
+
+  // Split the result and transform it to string
+  const { compX, compY } = result;
+
+  // Get the index on the node list that represent the current coordinate
+  let position;
+  coordinates.forEach((coordinate, index) => {
+    if (
+      parseInt(coordinate.dataset.x, 10) === compX &&
+      parseInt(coordinate.dataset.y, 10) === compY
+    ) {
+      position = index;
+    }
+  });
+
+  // Get the coordinate
+  const newCoordinate = coordinates[position];
+
+  // Add the class to it
+  addCoordinateClass(compX, compY, game.getPlayerBoard(), newCoordinate);
 }
