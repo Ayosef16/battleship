@@ -41,3 +41,36 @@ test("check that a new computer has a name", () => {
   const computer = computerFactory();
   expect(computer.getName()).toBe("computer");
 });
+
+test("check that attack method is working on the enemy gameboard", () => {
+  const gameboard = gameBoardFactory();
+  const computer = computerFactory();
+  gameboard.placeShip(0, 0, 5);
+  gameboard.placeShip(3, 5, 4, "col");
+  gameboard.placeShip(7, 0, 3, "col");
+  gameboard.placeShip(9, 4, 3);
+  gameboard.placeShip(6, 7, 2);
+  gameboard.placeShip(6, 1, 2);
+  gameboard.placeShip(2, 2, 2, "col");
+  gameboard.placeShip(9, 9, 1);
+  gameboard.placeShip(4, 7, 1);
+  gameboard.placeShip(8, 3, 1);
+  gameboard.placeShip(1, 8, 1);
+  let gridSize = 100;
+  while (gridSize > 0) {
+    computer.attack(gameboard);
+    gridSize--;
+  }
+  expect(gameboard.getGameBoard()).toEqual([
+    ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"],
+    ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"],
+    ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"],
+    ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"],
+    ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"],
+    ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"],
+    ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"],
+    ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"],
+    ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"],
+    ["x", "x", "x", "x", "x", "x", "x", "x", "x", "x"],
+  ]);
+});
