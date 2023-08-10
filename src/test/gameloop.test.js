@@ -3,7 +3,7 @@ import gameLoopFactory from "../modules/gameloop";
 
 test("check that you can get the player gameboard", () => {
   const game = gameLoopFactory();
-  expect(game.getPlayerBoard()).toEqual([
+  expect(game.getPlayerBoard().getGameBoard()).toEqual([
     ["1", "1", "1", "1", "1", "", "", "", "", ""],
     ["", "", "", "", "", "", "", "", "11", ""],
     ["", "", "7", "", "", "", "", "", "", ""],

@@ -9,8 +9,8 @@ export default function gameLoopFactory() {
   const computer = computerFactory();
 
   // Get player and computer board
-  const getPlayerBoard = () => playerGameBoard.getGameBoard();
-  const getComputerBoard = () => computerGameBoard.getGameBoard();
+  const getPlayerBoard = () => playerGameBoard;
+  const getComputerBoard = () => computerGameBoard;
 
   // Place player ships
   playerGameBoard.placeShip(0, 0, 5);
@@ -68,7 +68,9 @@ export default function gameLoopFactory() {
       return;
     }
     if (!isPlayerTurn) {
-      const { compX, compY } = computer.attack(playerGameBoard);
+      const result = computer.attack(playerGameBoard);
+      const compX = result.x;
+      const compY = result.y;
 
       // Check if the computer plays again or not
       isPlayerTurn = !playerGameBoard.isShipHitted(compX, compY);
