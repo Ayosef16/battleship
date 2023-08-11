@@ -9,6 +9,7 @@
   --blue: #749bc2;
   --light-blue: #91c8e4;
   --white: #f6f4eb;
+  --light-yellow: #fff7d4;
 }
 
 html {
@@ -51,6 +52,7 @@ body {
   background: url(./images/sunny.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 .grid-container {
@@ -97,16 +99,38 @@ body {
   background-color: var(--blue);
 }
 
+.game-winner {
+  font-size: 3rem;
+  color: var(--white);
+  padding: 20px;
+  position: absolute;
+  isolation: isolate;
+  display: none;
+}
+
+.game-winner::after {
+  content: "";
+  position: absolute;
+  background-color: black;
+  z-index: -1;
+  inset: 0;
+  opacity: 0.6;
+  border-radius: 1rem;
+}
+
 .hit-ship {
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='red' stroke-width='5'/><path d='M0 0 L100 100 ' stroke='red' stroke-width='5'/></svg>");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%, auto;
   border: 1px solid red;
+  background-color: var(--light-yellow);
 }
 
 .hit-miss {
   background: url(./images/ocean.png);
+  background-color: var(--light-yellow);
+  border: 1px solid var(--dark-blue);
 }
 
 #footer {
