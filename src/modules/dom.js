@@ -40,6 +40,10 @@ export function createEventListener(game) {
         return;
       const posX = parseInt(coordinate.dataset.x, 10);
       const posY = parseInt(coordinate.dataset.y, 10);
+
+      // Check if there is a winner prevent further plays
+      if (game.checkWinner()) return;
+
       // Check if it's the player turn
       if (game.getCurrentPlayerName() !== "computer") {
         displayCurrentPlayer(game.getCurrentPlayerName());
@@ -53,10 +57,16 @@ export function createEventListener(game) {
       while (game.getCurrentPlayerName() === "computer") {
         updatePlayerGrid(game);
       }
+
+      // Check if someone have won
+      if (game.checkWinner()) {
+        displayWinner(game);
+      }
     })
   );
 }
 
+// Add a hit class to the coordinate
 function addCoordinateClass(x, y, gameboard, coordinate) {
   if (gameboard.isShipHitted(x, y)) {
     coordinate.classList.add("hit-ship");
@@ -65,11 +75,13 @@ function addCoordinateClass(x, y, gameboard, coordinate) {
   }
 }
 
+// Display the name of the current player
 export function displayCurrentPlayer(name) {
   const currentPlayer = document.querySelector(".current-player");
   currentPlayer.textContent = `${name} turn`;
 }
 
+// Make a function that updates the player grid when the computer attacks
 function updatePlayerGrid(game) {
   // Get the player grid and it's coordinates
   const playerGrid = document.querySelector(".player-grid");
@@ -97,4 +109,10 @@ function updatePlayerGrid(game) {
 
   // Add the class to it
   addCoordinateClass(compX, compY, game.getPlayerBoard(), newCoordinate);
+}
+
+// Add a function that displays the winner
+function displayWinner(game) {
+  const gameWinner = document.querySelector(".game-winner");
+  gameWinner.textContent = game.declareWinner();
 }
