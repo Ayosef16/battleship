@@ -18,10 +18,26 @@
       <div class="header-title">Pirate King Battle</div>
     </header>
     <main id="main">
-      <div class="current-player"></div>
       <div class="grid-container">
-        <div class="player-grid"></div>
-        <div class="computer-grid"></div>
+        <div class="player-container">
+          <div class="player-grid"></div>
+          <div class="player-ships">
+            <div draggable="true" id="carrier" class="carrier"></div>
+            <div draggable="true" id="battleship" class="battleship"></div>
+            <div draggable="true" id="destroyer-1" class="destroyer"></div>
+            <div draggable="true" id="destroyer-2" class="destroyer"></div>
+            <div draggable="true" id="submarine-1" class="submarine"></div>
+            <div draggable="true" id="submarine-2" class="submarine"></div>
+            <div draggable="true" id="submarine-3" class="submarine"></div>
+            <div draggable="true" id="patrol-boat-1" class="patrol-boat"></div>
+            <div draggable="true" id="patrol-boat-2" class="patrol-boat"></div>
+            <div draggable="true" id="patrol-boat-3" class="patrol-boat"></div>
+            <div draggable="true" id="patrol-boat-4" class="patrol-boat"></div>
+          </div>
+        </div>
+        <div class="computer-container">
+          <div class="computer-grid"></div>
+        </div>
       </div>
       <div class="game-winner"></div>
     </main>
