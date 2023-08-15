@@ -20,19 +20,68 @@
     <main id="main">
       <div class="grid-container">
         <div class="player-container">
-          <div class="player-grid"></div>
-          <div class="player-ships">
-            <div draggable="true" id="carrier" class="carrier"></div>
-            <div draggable="true" id="battleship" class="battleship"></div>
-            <div draggable="true" id="destroyer-1" class="destroyer"></div>
-            <div draggable="true" id="destroyer-2" class="destroyer"></div>
-            <div draggable="true" id="submarine-1" class="submarine"></div>
-            <div draggable="true" id="submarine-2" class="submarine"></div>
-            <div draggable="true" id="submarine-3" class="submarine"></div>
-            <div draggable="true" id="patrol-boat-1" class="patrol-boat"></div>
-            <div draggable="true" id="patrol-boat-2" class="patrol-boat"></div>
-            <div draggable="true" id="patrol-boat-3" class="patrol-boat"></div>
-            <div draggable="true" id="patrol-boat-4" class="patrol-boat"></div>
+          <div class="player-title">Place your ships</div>
+          <div class="player-body">
+            <div class="player-grid"></div>
+            <div class="player-ships">
+              <div draggable="true" id="carrier" class="ship carrier"></div>
+              <div
+                draggable="true"
+                id="battleship"
+                class="ship battleship"
+              ></div>
+              <div class="destroyer-container">
+                <div
+                  draggable="true"
+                  id="destroyer-1"
+                  class="ship destroyer"
+                ></div>
+                <div
+                  draggable="true"
+                  id="destroyer-2"
+                  class="ship destroyer"
+                ></div>
+              </div>
+              <div class="submarine-container">
+                <div
+                  draggable="true"
+                  id="submarine-1"
+                  class="ship submarine"
+                ></div>
+                <div
+                  draggable="true"
+                  id="submarine-2"
+                  class="ship submarine"
+                ></div>
+                <div
+                  draggable="true"
+                  id="submarine-3"
+                  class="ship submarine"
+                ></div>
+              </div>
+              <div class="patrol-boat-container">
+                <div
+                  draggable="true"
+                  id="patrol-boat-1"
+                  class="ship patrol-boat"
+                ></div>
+                <div
+                  draggable="true"
+                  id="patrol-boat-2"
+                  class="ship patrol-boat"
+                ></div>
+                <div
+                  draggable="true"
+                  id="patrol-boat-3"
+                  class="ship patrol-boat"
+                ></div>
+                <div
+                  draggable="true"
+                  id="patrol-boat-4"
+                  class="ship patrol-boat"
+                ></div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="computer-container">
