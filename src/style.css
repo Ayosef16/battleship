@@ -10,6 +10,7 @@
   --light-blue: #91c8e4;
   --white: #f6f4eb;
   --light-yellow: #fff7d4;
+  --ship-block: 40px;
 }
 
 html {
@@ -68,6 +69,34 @@ body {
 
 .player-container {
   display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-title {
+  font-family: "Ysabeau SC", sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--white);
+  position: relative;
+  isolation: isolate;
+  padding: 20px;
+}
+
+.player-title::after {
+  content: "";
+  background-color: black;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.7;
+  border-radius: 1rem;
+}
+
+.player-body {
+  display: flex;
   gap: 100px;
   align-items: center;
   justify-content: center;
@@ -94,6 +123,49 @@ body {
   inset: 0;
   z-index: -1;
   opacity: 0.8;
+}
+
+.player-ships {
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.destroyer-container,
+.submarine-container,
+.patrol-boat-container {
+  display: flex;
+  gap: 10px;
+}
+
+.ship {
+  border: 2px solid var(--dark-blue);
+  height: var(--ship-block);
+}
+
+.carrier {
+  width: calc(var(--ship-block) * 5);
+  background-color: var(--white);
+}
+
+.battleship {
+  width: calc(var(--ship-block) * 4);
+  background-color: lightgreen;
+}
+
+.destroyer {
+  width: calc(var(--ship-block) * 3);
+  background-color: lightpink;
+}
+
+.submarine {
+  width: calc(var(--ship-block) * 2);
+  background-color: lightslategray;
+}
+
+.patrol-boat {
+  width: calc(var(--ship-block) * 1);
+  background-color: plum;
 }
 
 .grid-row {
