@@ -25,7 +25,7 @@ function createDomGrid(grid, size = 10) {
   }
 }
 
-export function createEventListener(game) {
+export function createCoordinateEvent(game) {
   // Get computer grid and the coordinates from it
   const computerGrid = document.querySelector(".computer-grid");
   const coordinates = computerGrid.querySelectorAll(".grid-col");
@@ -54,7 +54,10 @@ export function createEventListener(game) {
       addCoordinateClass(posX, posY, game.getComputerBoard(), coordinate);
 
       // Let the computer play as long as it's it turn.
-      while (game.getCurrentPlayerName() === "computer") {
+      while (
+        game.getCurrentPlayerName() === "computer" &&
+        !game.checkWinner()
+      ) {
         updatePlayerGrid(game);
       }
 
@@ -90,7 +93,11 @@ function updatePlayerGrid(game) {
   // Get the x and y position randomly generated for the computer
   const result = game.computerTurn();
 
-  // Split the result and transform it to string
+  // Check if there is no more coordinates to attack and if there is no winner
+  if (result === "All coordinates have been attacked!" || !result) return;
+  if (game.checkWinner()) return;
+
+  // Split the result
   const { compX, compY } = result;
 
   // Get the index on the node list that represent the current coordinate
@@ -113,6 +120,61 @@ function updatePlayerGrid(game) {
 
 // Add a function that displays the winner
 function displayWinner(game) {
+  // Display the winner
   const gameWinner = document.querySelector(".game-winner");
   gameWinner.textContent = game.declareWinner();
+  gameWinner.style.display = "block";
+
+  // Hide the grids
+  const gridContainer = document.querySelector(".grid-container");
+  gridContainer.style.display = "none";
+}
+
+// Create draggable events
+
+export function createDraggableEvents() {
+  // Get all the ships
+  const ships = document.querySelectorAll(".player-ships .ship");
+  ships.forEach((ship) => {
+    ship.addEventListener("dragstart", dragStart);
+  });
+
+  // Get all the player grid col
+  const playerCoordinates = document.querySelectorAll(".player-grid .grid-col");
+  playerCoordinates.forEach((coordinate) => {
+    coordinate.addEventListener("dragenter", dragEnter);
+    coordinate.addEventListener("dragover", dragOver);
+    coordinate.addEventListener("dragleave", dragLeave);
+    coordinate.addEventListener("drop", shipDrop);
+  });
+}
+
+function dragStart(e) {
+  e.dataTransfer.setData("text/plain", e.target.id);
+  console.log(e.target);
+}
+
+function dragEnter(e) {
+  e.preventDefault();
+  e.target.classList.add("drag-over");
+}
+
+function dragOver(e) {
+  e.preventDefault();
+  e.target.classList.add("drag-over");
+}
+
+function dragLeave(e) {
+  e.target.classList.remove("drag-over");
+}
+
+function shipDrop(e) {
+  e.target.classList.remove("drag-over");
+
+  // Get the draggable element
+  const id = e.dataTransfer.getData("text/plain");
+  const draggable = document.getElementById(id);
+
+  // Add it to the drop target
+  e.target.appendChild(draggable);
 }
