@@ -145,7 +145,7 @@ body {
 
 .carrier {
   width: calc(var(--ship-block) * 5);
-  background-color: var(--white);
+  background-color: brown;
 }
 
 .battleship {
@@ -177,6 +177,10 @@ body {
   border: 1px solid var(--white);
   flex: 1;
   transition: background-color 100ms ease-in-out;
+}
+
+.drag-over {
+  border: 2px dashed red;
 }
 
 .computer-grid .grid-col:hover {
@@ -216,6 +220,10 @@ body {
   background: url(./images/ocean.png);
   background-color: var(--light-yellow);
   border: 1px solid var(--dark-blue);
+}
+
+.hide {
+  display: none;
 }
 
 #footer {

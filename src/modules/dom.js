@@ -175,6 +175,35 @@ function shipDrop(e) {
   const id = e.dataTransfer.getData("text/plain");
   const draggable = document.getElementById(id);
 
-  // Add it to the drop target
-  e.target.appendChild(draggable);
+  // Get the coordinates and length
+  const gridSize = 10;
+  const length = parseInt(draggable.dataset.length, 10);
+  let { x } = e.target.dataset;
+  let { y } = e.target.dataset;
+  x = parseInt(x, 10);
+  y = parseInt(y, 10);
+  const endPoint = length + y;
+
+  // Check that the ship doesn't go beyond the boundaries of the grid
+  if (endPoint <= gridSize) {
+    // Add it to the drop target
+    displayShip(x, y, draggable, e.target);
+  }
+
+  // e.target.appendChild(draggable);
+}
+
+// Display the ship on the grid
+function displayShip(x, y, ship, coordinate) {
+  let newCoordinate = coordinate;
+  const shipLength = parseInt(ship.dataset.length, 10);
+  const shipColor = getComputedStyle(ship).getPropertyValue("background-color");
+
+  for (let i = 0; i < shipLength; i++) {
+    newCoordinate.style.backgroundColor = shipColor;
+    newCoordinate = newCoordinate.nextSibling;
+    console.log(coordinate);
+  }
+
+  ship.remove();
 }
