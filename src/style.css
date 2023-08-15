@@ -48,7 +48,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 100px;
+  gap: 20px;
   background: url(./images/sunny.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -62,8 +62,20 @@ body {
   gap: 100px;
 }
 
+.computer-container {
+  display: none;
+}
+
+.player-container {
+  display: flex;
+  gap: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
 .player-grid,
-.computer-grid {
+.computer-grid,
+.player-ships {
   min-width: 400px;
   min-height: 400px;
   outline: 3px solid black;
@@ -74,7 +86,8 @@ body {
 }
 
 .player-grid::after,
-.computer-grid::after {
+.computer-grid::after,
+.player-ships::after {
   content: "";
   background-color: var(--light-blue);
   position: absolute;
