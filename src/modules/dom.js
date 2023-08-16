@@ -46,7 +46,6 @@ export function createCoordinateEvent(game) {
 
       // Check if it's the player turn
       if (game.getCurrentPlayerName() !== "computer") {
-        displayCurrentPlayer(game.getCurrentPlayerName());
         game.playerTurn(posX, posY);
       }
 
@@ -76,12 +75,6 @@ function addCoordinateClass(x, y, gameboard, coordinate) {
   } else {
     coordinate.classList.add("hit-miss");
   }
-}
-
-// Display the name of the current player
-export function displayCurrentPlayer(name) {
-  const currentPlayer = document.querySelector(".current-player");
-  currentPlayer.textContent = `${name} turn`;
 }
 
 // Make a function that updates the player grid when the computer attacks
@@ -174,6 +167,7 @@ function shipDrop(e) {
   // Get the draggable element
   const id = e.dataTransfer.getData("text/plain");
   const draggable = document.getElementById(id);
+  const isHorizontal = !draggable.classList.contains("vertical");
 
   // Get the coordinates and length
   const gridSize = 10;
@@ -182,28 +176,73 @@ function shipDrop(e) {
   let { y } = e.target.dataset;
   x = parseInt(x, 10);
   y = parseInt(y, 10);
-  const endPoint = length + y;
+  const endPoint = isHorizontal ? length + y : length + x;
+  const isOverlapped = checkOverlap(x, y, length, e.target, isHorizontal);
 
   // Check that the ship doesn't go beyond the boundaries of the grid
-  if (endPoint <= gridSize) {
+  if (endPoint <= gridSize && !isOverlapped) {
     // Add it to the drop target
-    displayShip(x, y, draggable, e.target);
+    displayShip(x, y, draggable, e.target, isHorizontal);
   }
-
-  // e.target.appendChild(draggable);
 }
 
 // Display the ship on the grid
-function displayShip(x, y, ship, coordinate) {
+function displayShip(x, y, ship, coordinate, direction = true) {
   let newCoordinate = coordinate;
   const shipLength = parseInt(ship.dataset.length, 10);
   const shipColor = getComputedStyle(ship).getPropertyValue("background-color");
+  const endPoint = direction ? shipLength + y : shipLength + x;
 
-  for (let i = 0; i < shipLength; i++) {
-    newCoordinate.style.backgroundColor = shipColor;
-    newCoordinate = newCoordinate.nextSibling;
-    console.log(coordinate);
+  // Get the coordinates depending on the direction
+  if (direction) {
+    for (let i = y; i < endPoint; i++) {
+      newCoordinate.style.backgroundColor = shipColor;
+      newCoordinate.classList.add("occupied");
+      newCoordinate = newCoordinate.nextSibling;
+    }
+  } else {
+    for (let i = x; i < endPoint; i++) {
+      newCoordinate.style.backgroundColor = shipColor;
+      newCoordinate.classList.add("occupied");
+      newCoordinate = document.querySelector(
+        `[data-x="${(i + 1).toString()}"][data-y="${y.toString()}"]`
+      );
+    }
   }
 
   ship.remove();
+}
+
+// Check if the ship overlaps with one another
+function checkOverlap(x, y, length, coordinate, direction = true) {
+  let currentCoordinate = coordinate;
+  const endPoint = direction ? length + y : length + x;
+  if (direction) {
+    for (let i = y; i < endPoint; i++) {
+      if (currentCoordinate.classList.contains("occupied")) return true;
+      currentCoordinate = currentCoordinate.nextSibling;
+    }
+  } else {
+    for (let i = x; i < endPoint; i++) {
+      if (currentCoordinate.classList.contains("occupied")) return true;
+      currentCoordinate = document.querySelector(
+        `[data-x="${(i + 1).toString()}"][data-y="${y.toString()}"]`
+      );
+    }
+  }
+  return false;
+}
+
+export function swapAxis() {
+  const changeDirection = document.querySelector(".change-direction");
+  changeDirection.addEventListener("click", () => {
+    const ships = document.querySelectorAll(".ship");
+    ships.forEach((ship) => {
+      const width = getComputedStyle(ship).getPropertyValue("width");
+      const height = getComputedStyle(ship).getPropertyValue("height");
+      ship.style.width = height; // eslint-disable-line no-param-reassign
+      ship.style.height = width; // eslint-disable-line no-param-reassign
+      ship.classList.toggle("vertical");
+    });
+  });
 }
