@@ -12,19 +12,6 @@ export default function gameLoopFactory() {
   const getPlayerBoard = () => playerGameBoard;
   const getComputerBoard = () => computerGameBoard;
 
-  // Place player ships
-  playerGameBoard.placeShip(0, 0, 5);
-  playerGameBoard.placeShip(3, 5, 4, "col");
-  playerGameBoard.placeShip(7, 0, 3, "col");
-  playerGameBoard.placeShip(9, 4, 3);
-  playerGameBoard.placeShip(6, 7, 2);
-  playerGameBoard.placeShip(6, 1, 2);
-  playerGameBoard.placeShip(2, 2, 2, "col");
-  playerGameBoard.placeShip(9, 9, 1);
-  playerGameBoard.placeShip(4, 7, 1);
-  playerGameBoard.placeShip(8, 3, 1);
-  playerGameBoard.placeShip(1, 8, 1);
-
   // Place computer ships
   computerGameBoard.placeShip(1, 1, 5);
   computerGameBoard.placeShip(4, 2, 4, "col");
