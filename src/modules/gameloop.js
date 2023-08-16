@@ -69,6 +69,8 @@ export default function gameLoopFactory() {
     }
     if (!isPlayerTurn) {
       const result = computer.attack(playerGameBoard);
+      if (result === "All coordinates have been attacked")
+        return "All coordinates have been attacked!";
       const compX = result.x;
       const compY = result.y;
 
