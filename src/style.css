@@ -10,6 +10,11 @@
   --light-blue: #91c8e4;
   --white: #f6f4eb;
   --light-yellow: #fff7d4;
+  --brown: #862b0d;
+  --light-green: #98eecc;
+  --light-pink: #ffcacc;
+  --grey: #9babb8;
+  --purple: #beadfa;
   --ship-block: 40px;
 }
 
@@ -145,27 +150,39 @@ body {
 
 .carrier {
   width: calc(var(--ship-block) * 5);
-  background-color: brown;
+  background-color: var(--brown);
 }
 
 .battleship {
   width: calc(var(--ship-block) * 4);
-  background-color: lightgreen;
+  background-color: var(--light-green);
 }
 
 .destroyer {
   width: calc(var(--ship-block) * 3);
-  background-color: lightpink;
+  background-color: var(--light-pink);
 }
 
 .submarine {
   width: calc(var(--ship-block) * 2);
-  background-color: lightslategray;
+  background-color: var(--grey);
 }
 
 .patrol-boat {
   width: calc(var(--ship-block) * 1);
-  background-color: plum;
+  background-color: var(--purple);
+}
+
+.change-direction {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 5px;
+  border-radius: 1rem;
+  color: var(--white);
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
 }
 
 .grid-row {
