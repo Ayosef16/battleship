@@ -1,5 +1,13 @@
+export default function dom(game) {
+  completeDomGrid();
+  createCoordinateEvent(game);
+  createDraggableEvents();
+  swapAxis();
+  addStartGameListener();
+}
+
 // Complete the grid on the website
-export function completeDomGrid() {
+function completeDomGrid() {
   // Get the player and computer grid
   const playerGrid = document.querySelector(".player-grid");
   const computerGrid = document.querySelector(".computer-grid");
@@ -25,7 +33,7 @@ function createDomGrid(grid, size = 10) {
   }
 }
 
-export function createCoordinateEvent(game) {
+function createCoordinateEvent(game) {
   // Get computer grid and the coordinates from it
   const computerGrid = document.querySelector(".computer-grid");
   const coordinates = computerGrid.querySelectorAll(".grid-col");
@@ -125,7 +133,7 @@ function displayWinner(game) {
 
 // Create draggable events
 
-export function createDraggableEvents() {
+function createDraggableEvents() {
   // Get all the ships
   const ships = document.querySelectorAll(".player-ships .ship");
   ships.forEach((ship) => {
@@ -233,7 +241,7 @@ function checkOverlap(x, y, length, coordinate, direction = true) {
   return false;
 }
 
-export function swapAxis() {
+function swapAxis() {
   const changeDirection = document.querySelector(".change-direction");
   changeDirection.addEventListener("click", () => {
     const ships = document.querySelectorAll(".ship");
@@ -245,4 +253,22 @@ export function swapAxis() {
       ship.classList.toggle("vertical");
     });
   });
+}
+
+function addStartGameListener() {
+  document.querySelector(".start-game").addEventListener("click", startGame);
+}
+
+function startGame() {
+  // Define Variables
+  const playerShips = document.querySelector(".player-ships");
+  const computerContainer = document.querySelector(".computer-container");
+  const startGame = document.querySelector(".start-game"); // eslint-disable-line no-shadow
+  const playerTitle = document.querySelector(".player-title");
+
+  // Hide and show variables
+  playerShips.style.display = "none";
+  startGame.style.display = "none";
+  playerTitle.style.display = "none";
+  computerContainer.style.display = "block";
 }
