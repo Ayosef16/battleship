@@ -136,11 +136,18 @@ body {
   align-items: center;
 }
 
+.big-ship-container,
 .destroyer-container,
 .submarine-container,
 .patrol-boat-container {
   display: flex;
   gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.big-ship-container {
+  margin-top: 10px;
 }
 
 .ship {
@@ -173,16 +180,26 @@ body {
   background-color: var(--purple);
 }
 
-.change-direction {
-  font-size: 0.7rem;
+.change-direction,
+.start-game {
   font-weight: 700;
-  padding: 5px;
-  border-radius: 1rem;
-  color: var(--white);
+  font-family: "Ysabeau SC", sans-serif;
   background-color: black;
+  color: var(--white);
   border: none;
   cursor: pointer;
+  border-radius: 1rem;
+}
+
+.change-direction {
+  font-size: 0.7rem;
+  padding: 5px;
   margin-top: 20px;
+}
+
+.start-game {
+  font-size: 1.5rem;
+  padding: 10px;
 }
 
 .grid-row {
