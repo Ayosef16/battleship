@@ -181,7 +181,8 @@ body {
 }
 
 .change-direction,
-.start-game {
+.start-game,
+.play-again {
   font-weight: 700;
   font-family: "Ysabeau SC", sans-serif;
   background-color: black;
@@ -197,9 +198,15 @@ body {
   margin-top: 20px;
 }
 
-.start-game {
+.start-game,
+.play-again {
   font-size: 1.5rem;
   padding: 10px;
+}
+
+.play-again {
+  display: none;
+  margin-top: 200px;
 }
 
 .grid-row {
