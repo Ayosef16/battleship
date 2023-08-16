@@ -1,6 +1,6 @@
 # Pirate King Battle
 
-This is a battleship game builded following [TheOdinProject](https://www.theodinproject.com/lessons/node-path-javascript-battleship) curriculum.\
+This is a battleship game builded following [TheOdinProject](https://www.theodinproject.com/lessons/node-path-javascript-battleship) curriculum.
 
 ## Tools Used
 
