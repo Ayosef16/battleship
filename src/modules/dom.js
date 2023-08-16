@@ -1,9 +1,10 @@
 export default function dom(game) {
   completeDomGrid();
   createCoordinateEvent(game);
-  createDraggableEvents();
+  createDraggableEvents(game);
   swapAxis();
   addStartGameListener();
+  playAgainListener();
 }
 
 // Complete the grid on the website
@@ -66,6 +67,7 @@ function createCoordinateEvent(game) {
         !game.checkWinner()
       ) {
         updatePlayerGrid(game);
+        console.log(game.getPlayerBoard().getGameBoard());
       }
 
       // Check if someone have won
@@ -123,8 +125,10 @@ function updatePlayerGrid(game) {
 function displayWinner(game) {
   // Display the winner
   const gameWinner = document.querySelector(".game-winner");
+  const playAgain = document.querySelector(".play-again");
   gameWinner.textContent = game.declareWinner();
   gameWinner.style.display = "block";
+  playAgain.style.display = "block";
 
   // Hide the grids
   const gridContainer = document.querySelector(".grid-container");
@@ -133,7 +137,7 @@ function displayWinner(game) {
 
 // Create draggable events
 
-function createDraggableEvents() {
+function createDraggableEvents(game) {
   // Get all the ships
   const ships = document.querySelectorAll(".player-ships .ship");
   ships.forEach((ship) => {
@@ -146,13 +150,14 @@ function createDraggableEvents() {
     coordinate.addEventListener("dragenter", dragEnter);
     coordinate.addEventListener("dragover", dragOver);
     coordinate.addEventListener("dragleave", dragLeave);
-    coordinate.addEventListener("drop", shipDrop);
+    coordinate.addEventListener("drop", (e) => {
+      shipDrop(e, game);
+    });
   });
 }
 
 function dragStart(e) {
   e.dataTransfer.setData("text/plain", e.target.id);
-  console.log(e.target);
 }
 
 function dragEnter(e) {
@@ -169,7 +174,7 @@ function dragLeave(e) {
   e.target.classList.remove("drag-over");
 }
 
-function shipDrop(e) {
+function shipDrop(e, game) {
   e.target.classList.remove("drag-over");
 
   // Get the draggable element
@@ -191,6 +196,8 @@ function shipDrop(e) {
   if (endPoint <= gridSize && !isOverlapped) {
     // Add it to the drop target
     displayShip(x, y, draggable, e.target, isHorizontal);
+    const direction = isHorizontal ? "row" : "col";
+    game.getPlayerBoard().placeShip(x, y, length, direction);
   }
 }
 
@@ -271,4 +278,11 @@ function startGame() {
   startGame.style.display = "none";
   playerTitle.style.display = "none";
   computerContainer.style.display = "block";
+}
+
+function playAgainListener() {
+  const playAgain = document.querySelector(".play-again");
+  playAgain.addEventListener("click", () => {
+    location.reload(); // eslint-disable-line no-restricted-globals
+  });
 }
