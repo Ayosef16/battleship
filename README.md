@@ -6,14 +6,14 @@ This is a battleship game builded following [TheOdinProject](https://www.theodin
 
 #### Description:
 
-**_Instructions:_** \
+**_Instructions:_**
 
-This is a battleship game builded using javascript and inspired by the one piece world. The objective is to sink all the ships of the opponent and the first one to\ achieve that (either the player or the computer) is the winner. Before you start the game you have to place the ships on your grid, you can choose the axis where you\
+This is a battleship game builded using javascript and inspired by the one piece world. The objective is to sink all the ships of the opponent and the first one to achieve that (either the player or the computer) is the winner. Before you start the game you have to place the ships on your grid, you can choose the axis where you
 put them, after that the game can start.
 
-**_Structure:_** \
+**_Structure:_**
 
-The game was builded using a module pattern to help organize the different javascript logic, also this project use jest, which is a testing library that let you make\
+The game was builded using a module pattern to help organize the different javascript logic, also this project use jest, which is a testing library that let you make
 different tests for your functions based on the TDD principles.
 
 #### Tools Used:
